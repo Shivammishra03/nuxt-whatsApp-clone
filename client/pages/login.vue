@@ -11,12 +11,15 @@
             <span class="text-white text-2xl">Login with Google</span>
         </button>
     </div>
-
 </template>
 
 <script setup>
 import { firebaseAuth } from "@/utils/firebaseConfig";
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import { CHECK_USER_ROUTE } from "~/utils/ApiRoutes";
+import axios from  'axios';     
+
+const router = useRouter()
 const handleLogin = async () => {
     const provider = new GoogleAuthProvider();
     const {
@@ -24,7 +27,11 @@ const handleLogin = async () => {
     } =  await signInWithPopup(firebaseAuth, provider); 
     try {
         if(email) {
-
+            const {data} = await axios.post(CHECK_USER_ROUTE,{email});
+            console.log("datatatatta",data);
+            if(!data.status) {
+                router.push("/onboarding");
+            }
         }
     } catch (err) {
         console.log("err", err);
