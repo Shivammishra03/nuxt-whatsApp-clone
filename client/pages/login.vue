@@ -1,0 +1,39 @@
+<template>
+    <div class="flex justify-center items-center panel-header-background dark:bg-panel-header-dark h-screen w-screen flex-col gap-6">
+        <div class="flex justify-center items-center gap-2 text-white">
+            <NuxtImg src="/whatsapp.gif" height="300" width="300"/>
+            <span class="text-7xl">WhatsApp</span>
+        </div>
+        <button class="flex text-center justify-center gap-7 bg-search-input-container-background p-5 rounded-lg" @click="handleLogin()">
+            <div class="img-section">
+                <Icon name="logos:google-icon" size="32"/>
+            </div>
+            <span class="text-white text-2xl">Login with Google</span>
+        </button>
+    </div>
+
+</template>
+
+<script setup>
+import { firebaseAuth } from "@/utils/firebaseConfig";
+import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+const handleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    const {
+        user:{displayName:name, email, photoURL: profileImage},
+    } =  await signInWithPopup(firebaseAuth, provider); 
+    try {
+        if(email) {
+
+        }
+    } catch (err) {
+        console.log("err", err);
+    }
+}
+</script>
+
+<style>
+.panel-header-background  {
+    background-color: #202c33;
+}
+</style>
