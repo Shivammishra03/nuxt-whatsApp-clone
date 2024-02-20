@@ -1,5 +1,5 @@
 <script setup>
-
+// import Input from '~/components/common/input.vue';
 </script>
 <template>
     <div class="bg-panel-header-background h-screen w-screen text-white flex flex-col items-center justify-center">
@@ -10,7 +10,7 @@
         <h2 class="text-2xl">Create Your Profile</h2>
         <div class="flex gap-6 mt-6">
             <div class="flex flex-col items-center justify-center my-5 gap-6">
-
+                
             </div>
         </div>
     </div>
