@@ -24,11 +24,14 @@ import ContextMenu from './contextMenu.vue';
     const contextMenuOptions = [
         {name:"Take Photo", callback:() =>{console.log("take photo")}},
         {name:"Choose From Library", callback:() =>{console.log("take photo")}},
-        {name:"Upload Photo", callback:() =>{console.log("take photo")}},
-        {name:"Remove Photo", callback:() =>{console.log("take photo")}},
+        {name:"Upload Photo", callback:() =>{setGrabPhpto(true)}},
+        {name:"Remove Photo", callback:() =>{setImage("/default_avatar.png")}},
     ];
     const toggleContextMenu = () => {
         isContextMenuVisible.value = !isContextMenuVisible.value;
+    };
+    const PhotoPickerChange = () => {
+
     };
 </script>
 <template>
@@ -60,5 +63,6 @@ import ContextMenu from './contextMenu.vue';
             :toggleContextMenu="toggleContextMenu"
             v-if="isContextMenuVisible"
         />
+        <PhotoPicker @change="{PhotoPickerChange}"/>
     </div>
 </template>
