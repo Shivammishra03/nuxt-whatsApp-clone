@@ -61,8 +61,9 @@ import ContextMenu from './contextMenu.vue';
             :options="contextMenuOptions" 
             :cordinates="contextMenuCordinates"  
             :toggleContextMenu="toggleContextMenu"
+            :isContextMenuVisible="isContextMenuVisible"
             v-if="isContextMenuVisible"
         />
-        <PhotoPicker @change="{PhotoPickerChange}"/>
+        <!-- <PhotoPicker @change="{PhotoPickerChange}"/> -->
     </div>
 </template>

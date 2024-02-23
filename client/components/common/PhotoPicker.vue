@@ -1,9 +1,9 @@
-<script lang="ts" setup>
-
+<script setup>
+const props = defineProps({
+    onChange: Function,
+});
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
-        
-    </div>
+    <input type="file" hidden id="photoPicker" @change="props.onChange">
 </template>

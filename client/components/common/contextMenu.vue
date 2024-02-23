@@ -1,5 +1,5 @@
 <template>
-    <div ref="contextMenuRef" id="contextMenuRefID" :class="['bg-dropdown-background', 'fixed', 'py-2', 'z-[100]', 'shadow-xl']" :style="{ top: props.cordinates.y + 'px', left: props.cordinates.x + 'px' }" >
+    <div v-if="ContextMenuVisible" ref="contextMenuRef" id="contextMenuRefID" :class="['bg-dropdown-background', 'fixed', 'py-2', 'z-[100]', 'shadow-xl']" :style="{ top: props.cordinates.y + 'px', left: props.cordinates.x + 'px' }" >
         <ul>
             <li v-for="(item, index) in props.options" :key="index" @click="handleClick($event, item.callback)" class="px-5 py-2 cursor-pointer hover:bg-background-default">
                 <span class="text-white">{{ item.name }}</span>
@@ -10,24 +10,33 @@
 </template>
 
 <script setup>
+// import { onClickOutside } from '@vueuse/core'
 import {watchEffect } from 'vue';
     const contextMenuRef = ref(null);
+    const ContextMenuVisible = ref(false);
     const props = defineProps({
         options: Object,
         cordinates: Object,
         toggleContextMenu: Function,
+        isContextMenuVisible:Boolean
     });
+    console.log(props.isContextMenuVisible)
     const handleClick = (e, callback) => {
         e.stopPropagation();
         props.toggleContextMenu();
         callback(e);
     };
+    ContextMenuVisible.value = props.isContextMenuVisible;
+    // onClickOutside(contextMenuRef, 
+    //     event => console.log(event),
+    //     props.isContextMenuVisible = false
+    // );
 
 // // Function to handle outside click
 // const handleOutsideClick = (event) => {
 //   if (!contextMenuRef.value.contains(event.target)) {
 //     // setContextMenu(false);
-//     props.toggleContextMenu();
+//     props.isContextMenuVisible.value = false
 //   }
 // };
 
@@ -48,19 +57,9 @@ watchEffect(() => {
         // debugger
         console.log(event.target.id)
         if(event.target.id !== "contextOpener") {
-            // // debugger
-            // console.log("here");
-            // console.log(contextMenuRef);
-            // console.log(contextMenuRef.current);
-            // console.log(contextMenuRef.value);
-            // console.log(contextMenuRef.event.target);
-            // console.log(contextMenuRef.current.contains(event.target));
-            // if(contextMenuRef.value && !contextMenuRef.current.contains(event.target)){
-            //     console.log("come In");
-            // }
             if(contextMenuRef.value && !(contextMenuRef.value.compareDocumentPosition(event.target) & Node.DOCUMENT_POSITION_CONTAINED_BY) && event.target.id !== "contextMenuRefID")
             {
-                props.toggleContextMenu();
+                ContextMenuVisible.value = false
             }
         }
     };
