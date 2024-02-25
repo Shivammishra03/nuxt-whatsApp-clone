@@ -32,7 +32,7 @@ const image = ref('/default_avatar.png');
                 </div>
             </div>
             <div>
-                <Avatar type="xl" :img-src="image"/>
+                <Avatar type="xl" :img-src="image" @update-image="image=$event"/>
             </div>
         </div>
     </div>

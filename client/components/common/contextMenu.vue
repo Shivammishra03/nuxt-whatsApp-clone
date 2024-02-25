@@ -1,5 +1,5 @@
 <template>
-    <div v-if="ContextMenuVisible" ref="contextMenuRef" id="contextMenuRefID" :class="['bg-dropdown-background', 'fixed', 'py-2', 'z-[100]', 'shadow-xl']" :style="{ top: props.cordinates.y + 'px', left: props.cordinates.x + 'px' }" >
+    <div ref="contextMenuRef" id="contextMenuRefID" :class="['bg-dropdown-background', 'fixed', 'py-2', 'z-[100]', 'shadow-xl']" :style="{ top: props.cordinates.y + 'px', left: props.cordinates.x + 'px' }" >
         <ul>
             <li v-for="(item, index) in props.options" :key="index" @click="handleClick($event, item.callback)" class="px-5 py-2 cursor-pointer hover:bg-background-default">
                 <span class="text-white">{{ item.name }}</span>
@@ -52,20 +52,20 @@ import {watchEffect } from 'vue';
 //     document.removeEventListener('click', clickHandler);
 //   });
 // });
-watchEffect(() => {
-    const handleOutsideClick = (event) => {
-        // debugger
-        console.log(event.target.id)
-        if(event.target.id !== "contextOpener") {
-            if(contextMenuRef.value && !(contextMenuRef.value.compareDocumentPosition(event.target) & Node.DOCUMENT_POSITION_CONTAINED_BY) && event.target.id !== "contextMenuRefID")
-            {
-                ContextMenuVisible.value = false
-            }
-        }
-    };
-    document.addEventListener("click", handleOutsideClick);
-    return() => {
-        document.removeEventListener("click", handleOutsideClick);
-    }
-});
+// watchEffect(() => {
+//     const handleOutsideClick = (event) => {
+//         // debugger
+//         console.log(event.target.id)
+//         if(event.target.id !== "contextOpener") {
+//             if(contextMenuRef.value && !(contextMenuRef.value.compareDocumentPosition(event.target) & Node.DOCUMENT_POSITION_CONTAINED_BY) && event.target.id !== "contextMenuRefID")
+//             {
+//                 ContextMenuVisible.value = false
+//             }
+//         }
+//     };
+//     document.addEventListener("click", handleOutsideClick);
+//     return() => {
+//         document.removeEventListener("click", handleOutsideClick);
+//     }
+// });
 </script>

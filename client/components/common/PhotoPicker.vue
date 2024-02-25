@@ -1,9 +1,13 @@
 <script setup>
 const props = defineProps({
-    onChange: Function,
+    onchangeData: Function,
 });
 </script>
 
 <template>
-    <input type="file" hidden id="photoPicker" @change="props.onChange">
+    <Teleport to="body">
+        <div id="photoPickerElement">
+            <input type="file" hidden id="photoPicker" @change="props.onchangeData">
+        </div>
+    </Teleport>
 </template>

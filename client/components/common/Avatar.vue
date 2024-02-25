@@ -1,8 +1,13 @@
 <script setup>
-import ContextMenu from './contextMenu.vue';
+    import{watch} from "vue"
+    import ContextMenu from './contextMenu.vue';
+    import PhotoPicker from './PhotoPicker.vue';
+    import PhotoLibrary from './PhotoLibrary.vue';
 
     const isHover = ref(false);
     const isContextMenuVisible = ref(false);
+    const setGrabPhoto = ref(false);
+    const setShowPhotoLibrary = ref(false);
     const contextMenuCordinates = ref({
         x:0,
         y:0
@@ -23,16 +28,50 @@ import ContextMenu from './contextMenu.vue';
 
     const contextMenuOptions = [
         {name:"Take Photo", callback:() =>{console.log("take photo")}},
-        {name:"Choose From Library", callback:() =>{console.log("take photo")}},
-        {name:"Upload Photo", callback:() =>{setGrabPhpto(true)}},
+        {name:"Choose From Library", callback:() =>{
+            setShowPhotoLibrary.value = true;
+        }},
+        {name:"Upload Photo", callback:() =>{
+            setGrabPhoto.value = true;
+            if(setGrabPhoto) {
+                const data = document.getElementById("photoPicker");
+                data.click();
+                document.body.onfocus = (event) => {
+                    setGrabPhoto.value = false;
+                }
+            }
+        }},
         {name:"Remove Photo", callback:() =>{setImage("/default_avatar.png")}},
     ];
     const toggleContextMenu = () => {
         isContextMenuVisible.value = !isContextMenuVisible.value;
     };
-    const PhotoPickerChange = () => {
-
+    const emit = defineEmits(['update-image']);
+    const  setImage = (src) => {
+        emit('update-image', src);
     };
+    const PhotoPickerChange = async (e) => {
+        const file = e.target.files[0];
+        const reader = new  FileReader();
+        const data = document.createElement( "img" );
+        reader.onload =  function(e){
+           data.src = e.target.result;
+           data.setAttribute("data-src", e.target.result);
+        }
+        reader.readAsDataURL(file);
+        setTimeout(() =>{
+            setImage(data.src);
+        }, 100);
+    };
+    // watch(setGrabPhoto, () => {
+    //     if(setGrabPhoto) {
+    //         const data = document.getElementById("photoPicker");
+    //         data.click();
+    //         document.body.onfocus = (event) => {
+    //             setGrabPhoto.value = false;
+    //         }
+    //     }
+    // });
 </script>
 <template>
     <div class="flex items-center justify-center">
@@ -52,7 +91,7 @@ import ContextMenu from './contextMenu.vue';
                 </span>
             </div>
             <div class="h-60 w-60">
-                <NuxtImg :src="imgSrc" alt="avatar" class="rounded-full"/>
+                <NuxtImg id="DpImg" :src="imgSrc" alt="avatar" class="rounded-full"/>
                 {{ isHover }}
             </div>
         </div>
@@ -64,6 +103,7 @@ import ContextMenu from './contextMenu.vue';
             :isContextMenuVisible="isContextMenuVisible"
             v-if="isContextMenuVisible"
         />
-        <!-- <PhotoPicker @change="{PhotoPickerChange}"/> -->
+        <PhotoPicker :onchangeData="PhotoPickerChange"/>
+        <PhotoLibrary v-if="setShowPhotoLibrary" :onchangeData="PhotoPickerChange"/>
     </div>
 </template>
