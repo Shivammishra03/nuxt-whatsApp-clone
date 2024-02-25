@@ -1,13 +1,14 @@
 <script setup>
-    import{watch} from "vue"
     import ContextMenu from './contextMenu.vue';
     import PhotoPicker from './PhotoPicker.vue';
     import PhotoLibrary from './PhotoLibrary.vue';
+    import CapturePhoto from './CapturePhoto.vue';
 
     const isHover = ref(false);
     const isContextMenuVisible = ref(false);
     const setGrabPhoto = ref(false);
     const setShowPhotoLibrary = ref(false);
+    const setShowCapturePhoto = ref(false);
     const contextMenuCordinates = ref({
         x:0,
         y:0
@@ -27,7 +28,9 @@
     };
 
     const contextMenuOptions = [
-        {name:"Take Photo", callback:() =>{console.log("take photo")}},
+        {name:"Take Photo", callback:() => {
+            setShowCapturePhoto.value = true;
+        }},
         {name:"Choose From Library", callback:() =>{
             setShowPhotoLibrary.value = true;
         }},
@@ -63,15 +66,6 @@
             setImage(data.src);
         }, 100);
     };
-    // watch(setGrabPhoto, () => {
-    //     if(setGrabPhoto) {
-    //         const data = document.getElementById("photoPicker");
-    //         data.click();
-    //         document.body.onfocus = (event) => {
-    //             setGrabPhoto.value = false;
-    //         }
-    //     }
-    // });
 </script>
 <template>
     <div class="flex items-center justify-center">
@@ -105,5 +99,6 @@
         />
         <PhotoPicker :onchangeData="PhotoPickerChange"/>
         <PhotoLibrary v-if="setShowPhotoLibrary" @close="setShowPhotoLibrary = $event" @selected-avtar="setImage($event)"/>
+        <CapturePhoto v-if="setShowCapturePhoto"/>
     </div>
 </template>

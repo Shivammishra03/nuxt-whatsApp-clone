@@ -1,14 +1,3 @@
-<template>
-    <div ref="contextMenuRef" id="contextMenuRefID" :class="['bg-dropdown-background', 'fixed', 'py-2', 'z-[100]', 'shadow-xl']" :style="{ top: props.cordinates.y + 'px', left: props.cordinates.x + 'px' }" >
-        <ul>
-            <li v-for="(item, index) in props.options" :key="index" @click="handleClick($event, item.callback)" class="px-5 py-2 cursor-pointer hover:bg-background-default">
-                <span class="text-white">{{ item.name }}</span>
-            </li>
-        </ul>
-
-    </div>
-</template>
-
 <script setup>
 // import { onClickOutside } from '@vueuse/core'
 import {watchEffect } from 'vue';
@@ -69,3 +58,12 @@ import {watchEffect } from 'vue';
 //     }
 // });
 </script>
+<template>
+    <div ref="contextMenuRef" id="contextMenuRefID" :class="['bg-dropdown-background', 'fixed', 'py-2', 'z-[100]', 'shadow-xl']" :style="{ top: props.cordinates.y + 'px', left: props.cordinates.x + 'px' }" >
+        <ul>
+            <li v-for="(item, index) in props.options" :key="index" @click="handleClick($event, item.callback)" class="px-5 py-2 cursor-pointer hover:bg-background-default">
+                <span class="text-white">{{ item.name }}</span>
+            </li>
+        </ul>
+    </div>
+</template>

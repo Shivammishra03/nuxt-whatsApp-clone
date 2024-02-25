@@ -26,9 +26,9 @@
                 <Icon name="material-symbols:close-rounded" size="25"/>
            </div>
            <div class="grid grid-cols-3 justify-center items-center gap-8">
-            <div v-for="(image, index) in images" :key="index" @click="setImage(image); hidePhotoLibrary(false)" class="relative cursor-pointer">
-                <NuxtImg :src="image" alt="avatar" sizes="85"/>
-            </div>
+                <div v-for="(image, index) in images" :key="index" @click="setImage(image); hidePhotoLibrary(false)" class="relative cursor-pointer">
+                    <NuxtImg :src="image" alt="avatar" sizes="85"/>
+                </div>
            </div>
         </div>
     </div>
