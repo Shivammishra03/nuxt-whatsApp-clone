@@ -104,6 +104,6 @@
             v-if="isContextMenuVisible"
         />
         <PhotoPicker :onchangeData="PhotoPickerChange"/>
-        <PhotoLibrary v-if="setShowPhotoLibrary" :onchangeData="PhotoPickerChange"/>
+        <PhotoLibrary v-if="setShowPhotoLibrary" @close="setShowPhotoLibrary = $event" @selected-avtar="setImage($event)"/>
     </div>
 </template>
