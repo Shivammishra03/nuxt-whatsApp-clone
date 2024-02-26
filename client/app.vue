@@ -1,7 +1,3 @@
 <template>
-  <div>
-    <!-- <NuxtWelcome /> -->
-    <NuxtPage/>
-    <NuxtLink/>
-  </div>
+  <NuxtPage/>
 </template>

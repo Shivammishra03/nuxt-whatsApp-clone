@@ -15,8 +15,10 @@ export const useUserStore = defineStore('user',{
   actions: {
     // Action to update user data
     updateUser(userData: UserData) {
-      Object.assign(this, userData);
-      console.log("userData",userData)
+      this.displayName = userData.displayName;
+      this.email = userData.email;
+      this.profileImage = userData.profileImage;
+      console.log("userData", userData);
     },
   },
 });

@@ -23,6 +23,8 @@ import {useUserStore} from "../store/user";
 const router = useRouter();
 const userStore = useUserStore();
 
+console.log(userStore)
+
 const handleLogin = async () => {
     const provider = new GoogleAuthProvider();
     const {
@@ -32,15 +34,17 @@ const handleLogin = async () => {
         if(email) {
             const {data} = await axios.post(CHECK_USER_ROUTE,{email});
             console.log("datatatatta",data);
+            console.log("datatatattaStatus",data.status);
             if(!data.status) {
                 userStore.updateUser({ displayName: name || '', email: email || '', profileImage: profileImage || '' });
                 router.push("/onboarding");
             }
+
         }
     } catch (err) {
         console.log("err", err);
     }
-}
+};
 </script>
 
 <style>

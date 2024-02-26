@@ -86,7 +86,6 @@
             </div>
             <div class="h-60 w-60">
                 <NuxtImg id="DpImg" :src="imgSrc" alt="avatar" class="rounded-full"/>
-                {{ isHover }}
             </div>
         </div>
         <!-- Context Menu -->
@@ -99,6 +98,6 @@
         />
         <PhotoPicker :onchangeData="PhotoPickerChange"/>
         <PhotoLibrary v-if="setShowPhotoLibrary" @close="setShowPhotoLibrary = $event" @selected-avtar="setImage($event)"/>
-        <CapturePhoto v-if="setShowCapturePhoto"/>
+        <CapturePhoto v-if="setShowCapturePhoto" @capturePhotoValue="setShowCapturePhoto= $event" @capturedImg="setImage($event)"/>
     </div>
 </template>
