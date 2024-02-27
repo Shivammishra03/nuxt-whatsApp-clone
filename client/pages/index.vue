@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-
+import Main from '~/components/mainPage.vue';
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">hello</div>
+    <Main></Main>
 </template>
