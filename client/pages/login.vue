@@ -38,6 +38,9 @@ const handleLogin = async () => {
             if(!data.status) {
                 userStore.updateUser({ displayName: name || '', email: email || '', profileImage: profileImage || '' });
                 router.push("/onboarding");
+            } else {
+                userStore.updateUser({ displayName: name || '', email: email || '', profileImage: profileImage || '' });
+                router.push("/");
             }
 
         }
