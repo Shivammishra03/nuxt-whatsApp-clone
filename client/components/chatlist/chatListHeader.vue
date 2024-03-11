@@ -10,5 +10,13 @@ const userInfo = useUserStore();
     <div class="cursor-pointer">
       <Avatar v-if="userInfo.profileImage" type="sm" :imgSrc="userInfo.profileImage"/>
     </div>
+    <div class="flex gap-6 items-center">
+      <div class="cursor-pointer" title="New Chat">
+        <Icon name="material-symbols:chat-rounded" color="#aebac1"/>
+      </div>
+      <div class="cursor-pointer" title="Menu">
+        <Icon name="heroicons-outline:dots-vertical" color="#aebac1"/>
+      </div>
+    </div>
   </div>
 </template>
