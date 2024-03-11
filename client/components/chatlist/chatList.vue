@@ -1,6 +1,6 @@
 
 <script  setup>
-import ChatListHeader from "./ChatListHeader.vue";
+import ChatListHeader from "./chatListHeader.vue";
 import SearchBar  from './searchBar.vue';
 import List from './list.vue';
 </script>
