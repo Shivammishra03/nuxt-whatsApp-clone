@@ -5,9 +5,7 @@
 <template>
     <div class="bg-search-input-container-background flex py-3 pl-5 items-center gap-3 h-14">
         <div class="bg-panel-header-background flex items-center gap-5 px-3 py-1 rounded-lg flex-grow">
-            <!-- <span class="cursor-pointer text-l"> -->
-                <Icon name="heroicons-solid:magnifying-glass" color="#aebac1" class="cursor-pointer"/>
-            <!-- </span> -->
+            <Icon name="heroicons-solid:magnifying-glass" color="#aebac1" class="cursor-pointer"/>
             <div>
                 <input 
                     type="text"
