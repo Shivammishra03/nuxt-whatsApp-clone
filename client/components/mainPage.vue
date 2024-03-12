@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import ChatList from './chatlist/chatList.vue';
 import Empty from './emptyPage.vue';
+import chat from './chat/chat.vue';
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from "@/utils/firebaseConfig";
 import { CHECK_USER_ROUTE } from "~/utils/ApiRoutes";
@@ -41,8 +42,9 @@ onMounted(()=>{
 </script>
 
 <template>
-    <div class="grid grid-cols-[520px_minmax(900px,_1fr)_0px] h-screen w-screen max-h-screen max-w-full overflow-hidden">
+    <div class="grid grid-cols-[380px_minmax(900px,_1fr)_0px] h-screen w-screen max-h-screen max-w-full overflow-hidden">
         <ChatList/>
-        <Empty/>
+        <!-- <Empty/>  -->
+        <chat/> 
     </div>
 </template>

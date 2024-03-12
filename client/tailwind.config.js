@@ -6,6 +6,9 @@ module.exports = {
     ],
     theme: {
       extend: {
+        backgroundImage:{
+          "chat-background":  "url('/chat-bg.png')",
+        },
         colors:{
             "secondary": "#8696a0",
             "teal-light": "#7ae3c3",
