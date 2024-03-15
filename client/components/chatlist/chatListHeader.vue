@@ -1,8 +1,17 @@
 <script setup>
 import Avatar from '../common/Avatar.vue';
 import { useUserStore } from '@/store/user';
-
+import { useAllContacts } from '@/store/allContacts'
+import { defineEmits } from 'vue';
 const userInfo = useUserStore();
+const contacts = useAllContacts()
+
+const emit = defineEmits(['contactPageStatus']);
+
+const handleAllContactsPage = () => {
+  contacts.setContactPage(true);
+  emit( "contactPageStatus", contacts.contactsPage)
+};
 </script>
 
 <template>
@@ -11,7 +20,7 @@ const userInfo = useUserStore();
       <Avatar v-if="userInfo.profileImage" type="sm" :imgSrc="userInfo.profileImage"/>
     </div>
     <div class="flex gap-6 items-center">
-      <div class="cursor-pointer" title="New Chat">
+      <div class="cursor-pointer" title="New Chat" @click="handleAllContactsPage">
         <Icon name="material-symbols:chat-rounded" color="#aebac1"/>
       </div>
       <div class="cursor-pointer" title="Menu">

@@ -3,3 +3,4 @@ const Auth_ROUTE = `${HOST}/api/auth`;
 
 export const CHECK_USER_ROUTE =  `${Auth_ROUTE}/check-user`;
 export const ONBOARD_USER_ROUTE =  `${Auth_ROUTE}/onboard-user`;
+export const GET_ALL_CONTACTS =  `${Auth_ROUTE}/get-contacts`;
