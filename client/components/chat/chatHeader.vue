@@ -1,18 +1,19 @@
 <script lang="ts" setup>
 import Avatar from '../common/Avatar.vue';
 import { useCurrentChatUser } from '@/store/currentChatUser';
+import { ref, watch } from  'vue';
 const currentChatUserData = useCurrentChatUser();
 // const currentChatUserInfo = currentChatUserData.currentChatUser
 // console.log("currentChatUserInfo",currentChatUserInfo);
-const currentUserProfileImg = ref('/default_avatar.png');
-const currentUserName = ref('Anonymous');
+const currentUserProfileImg = ref(currentChatUserData.currentChatUser.profilePicture);
+const currentUserName = ref(currentChatUserData.currentChatUser.name);
 
-watch(() => currentChatUserData.currentChatUser, (newValue, oldValue) => {
-  if (newValue) {
-    currentUserProfileImg.value = newValue.profilePicture;
-    currentUserName.value = newValue.name;
-  }
-});
+// watch(() => currentChatUserData.currentChatUser, (newValue, oldValue) => {
+//   if (newValue) {
+//     currentUserProfileImg.value = newValue.profilePicture;
+//     currentUserName.value = newValue.name;
+//   }
+// });
 
 </script>
 

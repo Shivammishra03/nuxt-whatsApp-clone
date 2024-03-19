@@ -65,7 +65,7 @@ watch(() => currentChatUserData.currentChatUser, (newValue, oldValue) => {
 <template>
     <div class="grid grid-cols-[380px_minmax(900px,_1fr)_0px] h-screen w-screen max-h-screen max-w-full overflow-hidden">
         <ChatList/>
-        <chat v-show="isChatVisible"/> 
+        <chat v-if="isChatVisible"/> 
         <Empty/> 
     </div>
 </template>
