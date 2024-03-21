@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { defineProps } from 'vue';
+import { BiCheck, BiCheckAll } from "oh-vue-icons/icons";
 
 const props = defineProps({
     messageStatus: String,
@@ -9,6 +10,6 @@ const props = defineProps({
 
 <template>
     <div>
-        <h6>{{props.messageStatus}}</h6>
+       
     </div>
 </template>

@@ -10,13 +10,22 @@ import { ref, watch, onMounted } from 'vue';
 import axios from 'axios';
 import { useCurrentChatUser } from '@/store/currentChatUser';
 import { setMessage } from '~/store/setMessages';
+import { setSocket } from '@/store/setSocket';
+import { setNewMessage } from "@/store/addMessage";
+import { io } from 'socket.io-client';
+
 const currentChatUserData = useCurrentChatUser();
 
 const router = useRouter();
 const userInfo =  useUserStore();
-const useSetMessages = setMessage()
+const useSetMessages = setMessage();
+const useSocket = setSocket();
+const useNewMessage = setNewMessage()
 
 const redirectLogin = ref(false);
+const socket = ref();
+const setSockerEvent = ref(false);
+
 const checkAuthState = () => {
     onAuthStateChanged(firebaseAuth, async(currentUser) =>{
         if(!currentUser){
@@ -50,7 +59,18 @@ onMounted(()=>{
     // if(redirectLogin.value) {
     //     router.push('/login');
     // }
-    checkAuthState()
+    if(userInfo) {
+        socket.value = io(HOST);
+        socket.value.emit("add-user", userInfo.id);
+        useSocket.setUserSocket(socket.value);
+    }
+    checkAuthState();
+    if(socket.value && !setSockerEvent.value) {
+        socket.value.on("msg-recieve", (data:any)=>{
+            useNewMessage.addNewMessages(data);
+        })
+        setSockerEvent.value = true;
+    }
 });
 
 const isChatVisible = ref(false);

@@ -17,6 +17,7 @@
     "emoji-mart": "^5.5.2",
     "firebase": "^10.8.0",
     "nuxt": "^3.10.2",
+    "oh-vue-icons": "1.0.0-rc3",
     "postcss": "^8.4.35",
     "sharp": "^0.33.2",
     "socket.io-client": "^4.7.4",

@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia';
 
 interface setChatMessages {
-   messages : object
+   messages : object,
+   addMessage: string
 }
 
 export  const setMessage = defineStore('setChatMessages',{
     state: (): setChatMessages => ({
         messages: [],
+        addMessage: '',
     }),
     actions: {
         setUserMessages(ChatMessageData:any) {

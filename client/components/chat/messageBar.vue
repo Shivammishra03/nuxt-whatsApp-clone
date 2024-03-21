@@ -1,14 +1,21 @@
 <script lang="ts" setup>
-import { ref } from  'vue';
+import { ref, defineEmits } from  'vue';
 import axios from 'axios';
 import { ADD_MESSAGE_ROUTE } from '~/utils/ApiRoutes';
 import { useUserStore } from '@/store/user';
+import { setSocket } from '@/store/setSocket';
 import { useCurrentChatUser } from '@/store/currentChatUser';
 
 console.log("ADD_MESSAGE_ROUTE", ADD_MESSAGE_ROUTE)
 const textMessageVal =  ref('');
+
 const userInfo = useUserStore();
 const currentChatUser = useCurrentChatUser();
+const useSocket = setSocket();
+
+const emit = defineEmits(["send-msg"])
+
+console.log("useSocket",useSocket)
 
 // const sendMessage = async (message:any) => {
 //     if (textMessageVal.value) {
@@ -39,6 +46,12 @@ const sendMessage = async (message: string) => {
             to: currentChatUser.currentChatUser.id,
             from: userInfo.id,
             message: message
+        });
+
+        useSocket.socket.emit("send-msg",{
+            to: currentChatUser.currentChatUser.id,
+            from: userInfo.id,
+            message: response.data.message
         });
         
         console.log('Message sent successfully:', response.data);
